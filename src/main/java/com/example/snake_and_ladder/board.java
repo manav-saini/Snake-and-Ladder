@@ -1,14 +1,17 @@
 package com.example.snake_and_ladder;
 
+import javafx.geometry.Bounds;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class board {
+    private Tile[] tiles;
     int number_of_rows = 10;
     int number_of_columns = 10;
-    int total_tiles = number_of_columns * number_of_rows;
-    dice d = new dice();
-    ArrayList<tile> t;
+    int total_Tiles = number_of_columns * number_of_rows;
+    dice d ;
+    ArrayList<Tile> t;
     HashMap<Integer,Integer> snake_pos;
     HashMap<Integer,Integer> ladder_pos;
     player user1,user2;
@@ -18,6 +21,14 @@ public class board {
         t = new ArrayList<>();
         snake_pos = new HashMap<>();
         ladder_pos = new HashMap<>();
+    }
+
+    private void createBoard(Bounds b) {
+        tiles = new Tile[number_of_columns*number_of_rows];
+        for (int i = 0; i < number_of_columns*number_of_rows; i++) {
+            tiles[i] = new Tile("NONE");
+        }
+        Tiles_allocation();
     }
 
     void snake_pos_allocator(){
@@ -44,19 +55,25 @@ public class board {
         ladder_pos.put(68,87);
         ladder_pos.put(66,85);
         ladder_pos.put(64,83);
-
     }
 
-    void tiles_allocation(){
-        for(int i=0;i<total_tiles;i++){
+    public void setD(dice d) {
+        this.d = d;
+    }
+
+    public dice getD() {
+        return d;
+    }
+
+    void Tiles_allocation(){
+        for(int i=0;i<total_Tiles;i++){
             if(ladder_pos.containsKey(i)){
-                t.add(new tile("LADDER",i));
+                tiles[i] = new Tile("LADDER");
+                t.add(new Tile("LADDER"));
             }
             else if(snake_pos.containsKey(i)){
-                t.add(new tile("SNAKE",i));
-            }
-            else{
-                t.add(new tile("NONE",i));
+                tiles[i] = new Tile("SNAKE");
+                t.add(new Tile("SNAKE"));
             }
         }
     }
@@ -105,7 +122,7 @@ public class board {
         this.user2 = user2;
     }
 
-    public ArrayList<tile> getT() {
+    public ArrayList<Tile> getT() {
         return t;
     }
 }

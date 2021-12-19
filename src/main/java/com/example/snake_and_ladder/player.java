@@ -1,17 +1,31 @@
 package com.example.snake_and_ladder;
 
+import javafx.scene.shape.Circle;
+
 public class player {
-    String name;
-    int no_of_wins;
-    boolean turn;
-    boolean start;
-    piece P;
+    private Circle token;
+    private String name;
+    private int no_of_wins;
+    private boolean turn, start;
+    private piece P;
+
+    player(){
+        super();
+    }
 
     public player(String name, boolean turn, boolean start, piece P) {
         this.name = name;
         this.turn = turn;
         this.start = start;
         this.P = P;
+    }
+
+    public void setToken(Circle token) {
+        this.token = token;
+    }
+
+    public Circle getToken() {
+        return token;
     }
 
     public String getName() {

@@ -1,14 +1,13 @@
 package com.example.snake_and_ladder;
 
+import javafx.scene.shape.Rectangle;
+
 import java.util.Objects;
 
-public class tile {
+public class Tile extends Rectangle {
     String type;
-    int pos;
-
-    public tile(String type, int pos) {
+    public Tile(String type) {
         this.type = type;
-        this.pos = pos;
     }
 
     public String getType() {
@@ -17,14 +16,6 @@ public class tile {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public int getPos() {
-        return pos;
-    }
-
-    public void setPos(int pos) {
-        this.pos = pos;
     }
 
     public boolean special(){
