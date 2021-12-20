@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 
 public class dice {
     private Button bt;
-
+    private boolean isThrown = false;
     private int dice_value;
 
     public dice() {
@@ -30,5 +30,12 @@ public class dice {
     int number_generator(){
         dice_value =  (int) (Math.random()*6)+1;
         return (dice_value);
+    }
+
+    public void setThrown(boolean thrown) {
+        isThrown = thrown;
+    }
+    public boolean getThrown() {
+        return  isThrown;
     }
 }

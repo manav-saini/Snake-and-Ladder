@@ -78,6 +78,7 @@ public class HelloController {
         int val = Dice.number_generator();
         label_dice.setText(""+val);
         dice_button.setDisable(true);
+        Dice.setThrown(true);
     }
 
     public void player(TouchEvent touchEvent) {
@@ -94,17 +95,10 @@ public class HelloController {
     public void onStartClicked(ActionEvent actionEvent) {
         Threadclass t1 = new Threadclass();
         t1.start();
-        endgame();
     }
 
-    private void setVisibilityofTokens() {
+    private void setTokensproperties() {
         String name1,name2;
-        chb1.setDisable(true);
-        chb2.setDisable(true);
-        player1name1.setDisable(true);
-        player1name2.setDisable(true);
-        player2name1.setDisable(true);
-        player2name2.setDisable(true);
         if(chb2.isSelected()){
             name1 = player1name2.getAccessibleText();
             name2 = player2name2.getAccessibleText();
@@ -138,7 +132,6 @@ public class HelloController {
         player2.setName(name2);
         player1.setToken(tokenPlayer1);
         player2.setToken(tokenPlayer2);
-        startbutton.setDisable(true);
     }
 
     class Threadclass extends Thread{
@@ -174,8 +167,20 @@ public class HelloController {
     }
 
     private void startgame() {
-        setVisibilityofTokens();
+        setTokensproperties();
+        disableTokens(true);
         rungame();
+        endgame();
+    }
+
+    private void disableTokens(boolean set) {
+        chb1.setDisable(set);
+        chb2.setDisable(set);
+        player1name1.setDisable(set);
+        player1name2.setDisable(set);
+        player2name1.setDisable(set);
+        player2name2.setDisable(set);
+        startbutton.setDisable(set);
     }
 
     private void rungame() {
@@ -188,38 +193,60 @@ public class HelloController {
         }
         player1.setT(Board.getTiles(0));
         player2.setT(Board.getTiles(0));
-        player1.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player1.getToken().getLayoutX());
-        player2.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player2.getToken().getLayoutX());
+        player1.setCurrTile(-1);
+        player2.setCurrTile(-1);
+//        player1.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player1.getToken().getLayoutX());
+//        player2.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player2.getToken().getLayoutX());
         while(!gameover) {
-            player1.setTurn(!player1.isTurn());
-            player2.setTurn(!player2.isTurn());
-            p = player1.isTurn()?player1:player2;
             dice_button.setDisable(false);
-            System.out.println((p.getToken().getLayoutX()+" "+p.getToken().getLayoutY()));
             try{
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(dice_button.isPressed()){
-                for (int i = 0; i < Dice.getDice_value(); i++) {
-                    Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile() + 1), p.getCurrTile() + 1));
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            if(Dice.getThrown()){
+                player1.setTurn(!player1.isTurn());
+                player2.setTurn(!player2.isTurn());
+                p = player1.isTurn()?player1:player2;
+                System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
+                if((p.getCurrTile() + Dice.getDice_value() )<=99){
+                    for (int i = 0; i < Dice.getDice_value(); i++) {
+                        Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile()+ 1), p.getCurrTile()+ 1));
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
-            }
-            if(p.getCurrTile()>=99){
-                gameover=true;
+                if(p.getCurrTile()>=99){
+                    gameover=true;
+                }
+                System.out.println(p.getName()+" "+p.getCurrTile());
+                Dice.setThrown(false);
             }
             dice_button.setDisable(true);
         }
     }
 
     private void endgame() {
-        startbutton.setDisable(true);
+        disableTokens(false);
+        player1name1.setVisible(true);
+        player2name1.setVisible(true);
+        player1name2.setVisible(true);
+        player2name2.setVisible(true);
+        tokenGreen.setVisible(true);
+        tokenYellow.setVisible(true);
+        tokenBlue.setVisible(true);
+        tokenRed.setVisible(true);
+        resetGame();
+    }
+
+    private void resetGame() {
+        player1.reset();
+        player2.reset();
+        Dice.setThrown(false);
+        gameover=false;
     }
 }

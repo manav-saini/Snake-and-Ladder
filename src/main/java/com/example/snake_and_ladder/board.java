@@ -91,7 +91,7 @@ public class board {
     }
 
     void Tiles_allocation(Bounds b){
-        double orgx, orgy, wid, hei;
+        double orgx, orgy, wid, hei , value;
         orgx = b.getMinX();
         orgy = b.getMaxY();
         wid = (b.getMaxX()-b.getMinX())/number_of_columns;
@@ -104,16 +104,17 @@ public class board {
                 } else if (snake_pos.containsKey(k)) {
                     tiles[k].setType("SNAKE");
                 }
-                tiles[k].setLayoutY(orgy - (i*hei));
-                tiles[k].setY(orgy - (i*hei) - hei/2);
+                value=(orgy - (i*hei) - hei/2);
+                tiles[k].setLayoutY(value);
+                tiles[k].setY(value);
                 if(i%2 == 0){
-                    tiles[k].setLayoutX(orgx  + (j * wid));
-                    tiles[k].setX(orgx + (j * wid)+ wid/2);
+                    value = orgx  + (j * wid) + wid/2;
                 }
                 else{
-                    tiles[k].setLayoutX(orgx + (9-j) * wid);
-                    tiles[k].setX(orgx + ((9-j) * wid) +wid/2);
+                    value = orgx + ((9 - j) * wid) + wid / 2;
                 }
+                tiles[k].setLayoutX(value);
+                tiles[k].setX(value);
                 tiles[k].setFill(Color.BLACK);
                 System.out.println(k + ": "+tiles[k].getX()+" "+tiles[k].getY());
             }

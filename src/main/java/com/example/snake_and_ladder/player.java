@@ -7,6 +7,7 @@ public class player {
     private String name;
     private int no_of_wins;
     private boolean turn, start;
+    private double orgx, orgy;
     private piece P;
     private Tile t;
     private int currTile=0;
@@ -22,8 +23,17 @@ public class player {
         this.P = P;
     }
 
+    public void reset(){
+        this.token.setLayoutX(orgx);
+        this.token.setLayoutY(orgy);
+        this.token.setTranslateX(0);
+        this.token.setTranslateY(0);
+    }
+
     public void setToken(Circle token) {
         this.token = token;
+        orgx = token.getLayoutX();
+        orgy = token.getLayoutY();
     }
 
     public Circle getToken() {
@@ -67,7 +77,7 @@ public class player {
         token.setTranslateY(desTile.getY()-t.getY());
         token.setLayoutY(desTile.getLayoutY());
         token.setLayoutX(desTile.getLayoutX());
-        System.out.println("Layout : "+token.getLayoutY()+token.getLayoutX());
+        System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
         t = desTile;
         currTile = i;
     }
