@@ -93,22 +93,29 @@ public class board {
     void Tiles_allocation(Bounds b){
         double orgx, orgy, wid, hei;
         orgx = b.getMinX();
-        orgy = b.getMinY();
-        wid = (b.getMaxX()-b.getMinX())/number_of_rows;
-        hei = (b.getMaxY()-b.getMinY())/number_of_columns;
-        System.out.println(orgx+" "+orgy+" "+wid + " "+hei);
-        for (int j = 0; j < number_of_columns; j++) {
-            for (int i = 0; i < number_of_rows; i++) {
-                if (ladder_pos.containsKey(i)) {
-                    tiles[i].setType("LADDER");
-                } else if (snake_pos.containsKey(i)) {
-                    tiles[i].setType("SNAKE");
+        orgy = b.getMaxY();
+        wid = (b.getMaxX()-b.getMinX())/number_of_columns;
+        hei = (b.getMaxY()-b.getMinY())/number_of_rows;
+        for (int i = 0; i < number_of_rows; i++) {
+            for (int j = 0; j < number_of_columns; j++) {
+                int k = i*number_of_columns + j;
+                if (ladder_pos.containsKey(k)) {
+                    tiles[k].setType("LADDER");
+                } else if (snake_pos.containsKey(k)) {
+                    tiles[k].setType("SNAKE");
                 }
-                tiles[i].setLayoutX(orgx + i * wid);
-                tiles[i].setLayoutY(orgy + j * hei);
-                tiles[i].setX(orgx + i * wid);
-                tiles[i].setY(orgy + j * hei);
-                tiles[i].setFill(Color.BLACK);
+                tiles[k].setLayoutY(orgy - (i*hei));
+                tiles[k].setY(orgy - (i*hei) - hei/2);
+                if(i%2 == 0){
+                    tiles[k].setLayoutX(orgx  + (j * wid));
+                    tiles[k].setX(orgx + (j * wid)+ wid/2);
+                }
+                else{
+                    tiles[k].setLayoutX(orgx + (9-j) * wid);
+                    tiles[k].setX(orgx + ((9-j) * wid) +wid/2);
+                }
+                tiles[k].setFill(Color.BLACK);
+                System.out.println(k + ": "+tiles[k].getX()+" "+tiles[k].getY());
             }
         }
     }

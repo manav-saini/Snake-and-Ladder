@@ -67,6 +67,7 @@ public class player {
         token.setTranslateY(desTile.getY()-t.getY());
         token.setLayoutY(desTile.getLayoutY());
         token.setLayoutX(desTile.getLayoutX());
+        System.out.println("Layout : "+token.getLayoutY()+token.getLayoutX());
         t = desTile;
         currTile = i;
     }

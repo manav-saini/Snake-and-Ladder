@@ -195,18 +195,22 @@ public class HelloController {
             player2.setTurn(!player2.isTurn());
             p = player1.isTurn()?player1:player2;
             dice_button.setDisable(false);
+            System.out.println((p.getToken().getLayoutX()+" "+p.getToken().getLayoutY()));
             try{
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            for (int i = 0; i < Dice.getDice_value(); i++) {
-                Platform.runLater(new Runableclass(p,Board.getTiles(p.getCurrTile()+1),p.getCurrTile()+1));
-                try{
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            if(dice_button.isPressed()){
+                for (int i = 0; i < Dice.getDice_value(); i++) {
+                    Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile() + 1), p.getCurrTile() + 1));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+                System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
             }
             if(p.getCurrTile()>=99){
                 gameover=true;
