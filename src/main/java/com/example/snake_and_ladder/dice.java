@@ -23,6 +23,10 @@ public class dice {
         this.bt = bt;
     }
 
+    public int getDice_value() {
+        return dice_value;
+    }
+
     int number_generator(){
         dice_value =  (int) (Math.random()*6)+1;
         return (dice_value);

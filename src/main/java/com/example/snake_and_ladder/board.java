@@ -1,6 +1,8 @@
 package com.example.snake_and_ladder;
 
 import javafx.geometry.Bounds;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,14 +23,23 @@ public class board {
         t = new ArrayList<>();
         snake_pos = new HashMap<>();
         ladder_pos = new HashMap<>();
+        snake_pos_allocator();
+        ladder_pos_allocator();
     }
 
-    private void createBoard(Bounds b) {
+    void createBoard(Bounds b) {
+        double wid,hei;
+        wid = (b.getMaxX()-b.getMinX())/number_of_rows;
+        hei = (b.getMaxY()-b.getMinY())/number_of_columns;
         tiles = new Tile[number_of_columns*number_of_rows];
         for (int i = 0; i < number_of_columns*number_of_rows; i++) {
             tiles[i] = new Tile("NONE");
+            tiles[i].setWidth(wid);
+            tiles[i].setHeight(hei);
+            t.add(tiles[i]);
         }
-        Tiles_allocation();
+        Tiles_allocation(b);
+
     }
 
     void snake_pos_allocator(){
@@ -65,15 +76,39 @@ public class board {
         return d;
     }
 
-    void Tiles_allocation(){
-        for(int i=0;i<total_Tiles;i++){
-            if(ladder_pos.containsKey(i)){
-                tiles[i] = new Tile("LADDER");
-                t.add(new Tile("LADDER"));
-            }
-            else if(snake_pos.containsKey(i)){
-                tiles[i] = new Tile("SNAKE");
-                t.add(new Tile("SNAKE"));
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public Tile getTiles(int i) {
+        try{
+            return tiles[i];
+        }
+        catch (Exception e){
+            System.out.println("Tile doesn't exist");
+            return null;
+        }
+    }
+
+    void Tiles_allocation(Bounds b){
+        double orgx, orgy, wid, hei;
+        orgx = b.getMinX();
+        orgy = b.getMinY();
+        wid = (b.getMaxX()-b.getMinX())/number_of_rows;
+        hei = (b.getMaxY()-b.getMinY())/number_of_columns;
+        System.out.println(orgx+" "+orgy+" "+wid + " "+hei);
+        for (int j = 0; j < number_of_columns; j++) {
+            for (int i = 0; i < number_of_rows; i++) {
+                if (ladder_pos.containsKey(i)) {
+                    tiles[i].setType("LADDER");
+                } else if (snake_pos.containsKey(i)) {
+                    tiles[i].setType("SNAKE");
+                }
+                tiles[i].setLayoutX(orgx + i * wid);
+                tiles[i].setLayoutY(orgy + j * hei);
+                tiles[i].setX(orgx + i * wid);
+                tiles[i].setY(orgy + j * hei);
+                tiles[i].setFill(Color.BLACK);
             }
         }
     }

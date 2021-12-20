@@ -1,17 +1,21 @@
 package com.example.snake_and_ladder;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TouchEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class HelloController {
+    boolean gameover = false;
     static dice Dice;
     @FXML
     public Label label_dice;
@@ -38,15 +42,19 @@ public class HelloController {
     private ImageView img;
     @FXML
     private Button dice_button;
+    private board Board;
 
     private player player1, player2;
 
     public void initialize(){
+        Board = new board();
         Dice = new dice(dice_button);
         chb1.setSelected(false);
         chb2.setSelected(false);
         player1 = new player();
         player2 = new player();
+        dice_button.setDisable(true);
+        Board.createBoard(img.localToScene(img.getBoundsInLocal()));
     }
 
     void changecolor(player p,String choice){
@@ -69,6 +77,7 @@ public class HelloController {
     void onDiceclicked(ActionEvent event) {
         int val = Dice.number_generator();
         label_dice.setText(""+val);
+        dice_button.setDisable(true);
     }
 
     public void player(TouchEvent touchEvent) {
@@ -85,6 +94,7 @@ public class HelloController {
     public void onStartClicked(ActionEvent actionEvent) {
         Threadclass t1 = new Threadclass();
         t1.start();
+        endgame();
     }
 
     private void setVisibilityofTokens() {
@@ -128,6 +138,7 @@ public class HelloController {
         player2.setName(name2);
         player1.setToken(tokenPlayer1);
         player2.setToken(tokenPlayer2);
+        startbutton.setDisable(true);
     }
 
     class Threadclass extends Thread{
@@ -147,7 +158,64 @@ public class HelloController {
         }
     }
 
+    class Runableclass implements Runnable{
+        player p;
+        Tile t;
+        int currT;
+        Runableclass(player p,Tile t, int i){
+            this.p = p;
+            this.t = t;
+            this.currT = i;
+        }
+        @Override
+        public void run() {
+            p.run(t, currT);
+        }
+    }
+
     private void startgame() {
         setVisibilityofTokens();
+        rungame();
+    }
+
+    private void rungame() {
+        player p ;
+        if((int)(Math.random()*2) ==0){
+            player1.setTurn(true);
+        }
+        else{
+            player2.setTurn(true);
+        }
+        player1.setT(Board.getTiles(0));
+        player2.setT(Board.getTiles(0));
+        player1.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player1.getToken().getLayoutX());
+        player2.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player2.getToken().getLayoutX());
+        while(!gameover) {
+            player1.setTurn(!player1.isTurn());
+            player2.setTurn(!player2.isTurn());
+            p = player1.isTurn()?player1:player2;
+            dice_button.setDisable(false);
+            try{
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < Dice.getDice_value(); i++) {
+                Platform.runLater(new Runableclass(p,Board.getTiles(p.getCurrTile()+1),p.getCurrTile()+1));
+                try{
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(p.getCurrTile()>=99){
+                gameover=true;
+            }
+            dice_button.setDisable(true);
+        }
+    }
+
+    private void endgame() {
+        startbutton.setDisable(true);
     }
 }
