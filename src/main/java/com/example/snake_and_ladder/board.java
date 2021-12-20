@@ -1,14 +1,19 @@
 package com.example.snake_and_ladder;
 
+import javafx.geometry.Bounds;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class board {
+    private Tile[] tiles;
     int number_of_rows = 10;
     int number_of_columns = 10;
-    int total_tiles = number_of_columns * number_of_rows;
-    dice d = new dice();
-    ArrayList<tile> t;
+    int total_Tiles = number_of_columns * number_of_rows;
+    dice d ;
+    ArrayList<Tile> t;
     HashMap<Integer,Integer> snake_pos;
     HashMap<Integer,Integer> ladder_pos;
     player user1,user2;
@@ -18,6 +23,23 @@ public class board {
         t = new ArrayList<>();
         snake_pos = new HashMap<>();
         ladder_pos = new HashMap<>();
+        snake_pos_allocator();
+        ladder_pos_allocator();
+    }
+
+    void createBoard(Bounds b) {
+        double wid,hei;
+        wid = (b.getMaxX()-b.getMinX())/number_of_rows;
+        hei = (b.getMaxY()-b.getMinY())/number_of_columns;
+        tiles = new Tile[number_of_columns*number_of_rows];
+        for (int i = 0; i < number_of_columns*number_of_rows; i++) {
+            tiles[i] = new Tile("NONE");
+            tiles[i].setWidth(wid);
+            tiles[i].setHeight(hei);
+            t.add(tiles[i]);
+        }
+        Tiles_allocation(b);
+
     }
 
     void snake_pos_allocator(){
@@ -44,19 +66,56 @@ public class board {
         ladder_pos.put(68,87);
         ladder_pos.put(66,85);
         ladder_pos.put(64,83);
-
     }
 
-    void tiles_allocation(){
-        for(int i=0;i<total_tiles;i++){
-            if(ladder_pos.containsKey(i)){
-                t.add(new tile("LADDER",i));
-            }
-            else if(snake_pos.containsKey(i)){
-                t.add(new tile("SNAKE",i));
-            }
-            else{
-                t.add(new tile("NONE",i));
+    public void setD(dice d) {
+        this.d = d;
+    }
+
+    public dice getD() {
+        return d;
+    }
+
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public Tile getTiles(int i) {
+        try{
+            return tiles[i];
+        }
+        catch (Exception e){
+            System.out.println("Tile doesn't exist");
+            return null;
+        }
+    }
+
+    void Tiles_allocation(Bounds b){
+        double orgx, orgy, wid, hei;
+        orgx = b.getMinX();
+        orgy = b.getMaxY();
+        wid = (b.getMaxX()-b.getMinX())/number_of_columns;
+        hei = (b.getMaxY()-b.getMinY())/number_of_rows;
+        for (int i = 0; i < number_of_rows; i++) {
+            for (int j = 0; j < number_of_columns; j++) {
+                int k = i*number_of_columns + j;
+                if (ladder_pos.containsKey(k)) {
+                    tiles[k].setType("LADDER");
+                } else if (snake_pos.containsKey(k)) {
+                    tiles[k].setType("SNAKE");
+                }
+                tiles[k].setLayoutY(orgy - (i*hei));
+                tiles[k].setY(orgy - (i*hei) - hei/2);
+                if(i%2 == 0){
+                    tiles[k].setLayoutX(orgx  + (j * wid));
+                    tiles[k].setX(orgx + (j * wid)+ wid/2);
+                }
+                else{
+                    tiles[k].setLayoutX(orgx + (9-j) * wid);
+                    tiles[k].setX(orgx + ((9-j) * wid) +wid/2);
+                }
+                tiles[k].setFill(Color.BLACK);
+                System.out.println(k + ": "+tiles[k].getX()+" "+tiles[k].getY());
             }
         }
     }
@@ -105,7 +164,7 @@ public class board {
         this.user2 = user2;
     }
 
-    public ArrayList<tile> getT() {
+    public ArrayList<Tile> getT() {
         return t;
     }
 }

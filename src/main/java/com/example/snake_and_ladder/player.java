@@ -1,17 +1,33 @@
 package com.example.snake_and_ladder;
 
+import javafx.scene.shape.Circle;
+
 public class player {
-    String name;
-    int no_of_wins;
-    boolean turn;
-    boolean start;
-    piece P;
+    private Circle token;
+    private String name;
+    private int no_of_wins;
+    private boolean turn, start;
+    private piece P;
+    private Tile t;
+    private int currTile=0;
+
+    player(){
+        super();
+    }
 
     public player(String name, boolean turn, boolean start, piece P) {
         this.name = name;
         this.turn = turn;
         this.start = start;
         this.P = P;
+    }
+
+    public void setToken(Circle token) {
+        this.token = token;
+    }
+
+    public Circle getToken() {
+        return token;
     }
 
     public String getName() {
@@ -44,5 +60,31 @@ public class player {
 
     public void setStart(boolean start) {
         this.start = start;
+    }
+
+    void run(Tile desTile, int i){
+        token.setTranslateX(desTile.getX()- t.getX());
+        token.setTranslateY(desTile.getY()-t.getY());
+        token.setLayoutY(desTile.getLayoutY());
+        token.setLayoutX(desTile.getLayoutX());
+        System.out.println("Layout : "+token.getLayoutY()+token.getLayoutX());
+        t = desTile;
+        currTile = i;
+    }
+
+    public void setT(Tile t) {
+        this.t = t;
+    }
+
+    public Tile getT() {
+        return t;
+    }
+
+    public int getCurrTile() {
+        return currTile;
+    }
+
+    public void setCurrTile(int currTile) {
+        this.currTile = currTile;
     }
 }
