@@ -15,7 +15,7 @@
    <children>
       <ImageView fx:id="img" fitHeight="500.0" fitWidth="500.0" layoutX="284.0" layoutY="22.0" pickOnBounds="true">
          <image>
-            <Image url="@snl.jpeg" />
+            <Image url="@board.png" />
          </image></ImageView>
       <Button fx:id="dice_button" layoutX="50.0" layoutY="137.0" mnemonicParsing="false" onAction="#onDiceclicked" prefHeight="65.0" prefWidth="65.0" text="Dice" />
       <Circle fx:id="tokenBlue" fill="DODGERBLUE" layoutX="91.0" layoutY="393.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />

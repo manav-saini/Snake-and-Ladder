@@ -227,6 +227,25 @@ public class HelloController {
                         }
                     }
                 }
+                int tmp = p .getCurrTile() + 1;
+                if(Board.getLadder_pos().containsKey(tmp)){
+                    tmp = Board.getLadder_pos().get(tmp) - 1;
+                    Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(Board.getSnake_pos().containsKey(tmp)){
+                    tmp = Board.getSnake_pos().get(tmp) - 1;
+                    Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
                 if(p.getCurrTile()>=99){
                     gameover=true;

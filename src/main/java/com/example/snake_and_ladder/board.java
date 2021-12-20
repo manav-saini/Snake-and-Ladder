@@ -14,8 +14,8 @@ public class board {
     int total_Tiles = number_of_columns * number_of_rows;
     dice d ;
     ArrayList<Tile> t;
-    HashMap<Integer,Integer> snake_pos;
-    HashMap<Integer,Integer> ladder_pos;
+    private HashMap<Integer,Integer> snake_pos;
+    private HashMap<Integer,Integer> ladder_pos;
     player user1,user2;
     player curr_player;
 
@@ -25,6 +25,14 @@ public class board {
         ladder_pos = new HashMap<>();
         snake_pos_allocator();
         ladder_pos_allocator();
+    }
+
+    public HashMap<Integer, Integer> getLadder_pos() {
+        return ladder_pos;
+    }
+
+    public HashMap<Integer, Integer> getSnake_pos() {
+        return snake_pos;
     }
 
     void createBoard(Bounds b) {
@@ -43,29 +51,29 @@ public class board {
     }
 
     void snake_pos_allocator(){
-        snake_pos.put(24,18);
-        snake_pos.put(26,16);
-        snake_pos.put(28,14);
-        snake_pos.put(55,34);
-        snake_pos.put(57,36);
-        snake_pos.put(59,38);
-        snake_pos.put(91,50);
-        snake_pos.put(95,74);
-        snake_pos.put(97,76);
-        snake_pos.put(99,78);
+        snake_pos.put(24,5);
+        snake_pos.put(56,25);
+        snake_pos.put(43,22);
+        snake_pos.put(60,42);
+        snake_pos.put(69,48);
+        snake_pos.put(86,53);
+        snake_pos.put(90,72);
+        snake_pos.put(94,73);
+        snake_pos.put(96,84);
+        snake_pos.put(98,58);
     }
 
     void ladder_pos_allocator(){
-        ladder_pos.put(5,17);
-        ladder_pos.put(7,15);
-        ladder_pos.put(9,13);
-        ladder_pos.put(33,47);
-        ladder_pos.put(35,45);
-        ladder_pos.put(37,43);
-        ladder_pos.put(40,81);
-        ladder_pos.put(68,87);
-        ladder_pos.put(66,85);
-        ladder_pos.put(64,83);
+        ladder_pos.put(3,21);
+        ladder_pos.put(8,46);
+        ladder_pos.put(16,26);
+        ladder_pos.put(29,33);
+        ladder_pos.put(37,65);
+        ladder_pos.put(50,70);
+        ladder_pos.put(61,82);
+        ladder_pos.put(64,77);
+        ladder_pos.put(76,95);
+        ladder_pos.put(89,91);
     }
 
     public void setD(dice d) {
