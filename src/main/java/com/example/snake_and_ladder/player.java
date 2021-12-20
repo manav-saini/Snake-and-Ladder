@@ -2,6 +2,8 @@ package com.example.snake_and_ladder;
 
 import javafx.scene.shape.Circle;
 
+import static java.lang.Thread.sleep;
+
 public class player {
     private Circle token;
     private String name;
@@ -73,8 +75,8 @@ public class player {
     }
 
     void run(Tile desTile, int i){
-        token.setTranslateX(desTile.getX()- t.getX());
-        token.setTranslateY(desTile.getY()-t.getY());
+        token.setTranslateX(desTile.getX()- token.getLayoutX());
+        token.setTranslateY(desTile.getY()- token.getLayoutY());
         token.setLayoutY(desTile.getLayoutY());
         token.setLayoutX(desTile.getLayoutX());
         System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());

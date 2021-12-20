@@ -43,6 +43,7 @@ public class HelloController {
     @FXML
     private Button dice_button;
     private board Board;
+    private Tile startTile;
 
     private player player1, player2;
 
@@ -54,7 +55,14 @@ public class HelloController {
         player1 = new player();
         player2 = new player();
         dice_button.setDisable(true);
+        startTile = new Tile("NONE");
         Board.createBoard(img.localToScene(img.getBoundsInLocal()));
+        startTile.setWidth(Board.getTiles(0).getWidth());
+        startTile.setHeight(Board.getTiles(0).getHeight());
+        startTile.setX(Board.getTiles(0).getX());
+        startTile.setY(Board.getTiles(0).getY()+startTile.getHeight());
+        startTile.setLayoutY(Board.getTiles(0).getLayoutY());
+        startTile.setLayoutX(Board.getTiles(0).getLayoutX()+startTile.getWidth());
     }
 
     void changecolor(player p,String choice){
@@ -191,10 +199,10 @@ public class HelloController {
         else{
             player2.setTurn(true);
         }
-        player1.setT(Board.getTiles(0));
-        player2.setT(Board.getTiles(0));
-        player1.setCurrTile(-1);
-        player2.setCurrTile(-1);
+        player1.run(startTile,-1);
+        player2.run(startTile,-1);
+//        player1.getToken().setLayoutY(Board.getTiles(0).getLayoutY()-Board.getTiles(0).getHeight());
+//        player1.getToken().setLayoutX(Board.getTiles(0).getLayoutX());
 //        player1.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player1.getToken().getLayoutX());
 //        player2.getToken().setTranslateX(Board.getTiles(0).getLayoutX() - player2.getToken().getLayoutX());
         while(!gameover) {

@@ -96,6 +96,14 @@ public class board {
         orgy = b.getMaxY();
         wid = (b.getMaxX()-b.getMinX())/number_of_columns;
         hei = (b.getMaxY()-b.getMinY())/number_of_rows;
+        double colArr[] = new double[number_of_columns];
+        double rowArr[]=new double[number_of_rows];
+        for (int i = 0; i < number_of_columns; i++) {
+            colArr[i] = orgx  + (i * wid) - wid/2;
+        }
+        for (int i = 0; i < number_of_rows; i++) {
+            rowArr[i]= (orgy - (i*hei) - hei/2);
+        }
         for (int i = 0; i < number_of_rows; i++) {
             for (int j = 0; j < number_of_columns; j++) {
                 int k = i*number_of_columns + j;
@@ -104,17 +112,16 @@ public class board {
                 } else if (snake_pos.containsKey(k)) {
                     tiles[k].setType("SNAKE");
                 }
-                value=(orgy - (i*hei) - hei/2);
-                tiles[k].setLayoutY(value);
-                tiles[k].setY(value);
+                tiles[k].setLayoutY(rowArr[i]);
+                tiles[k].setY(rowArr[i]);
                 if(i%2 == 0){
-                    value = orgx  + (j * wid) + wid/2;
+                    tiles[k].setLayoutX(colArr[j]);
+                    tiles[k].setX(colArr[j]);
                 }
                 else{
-                    value = orgx + ((9 - j) * wid) + wid / 2;
+                    tiles[k].setLayoutX(colArr[9-j]);
+                    tiles[k].setX(colArr[9-j]);
                 }
-                tiles[k].setLayoutX(value);
-                tiles[k].setX(value);
                 tiles[k].setFill(Color.BLACK);
                 System.out.println(k + ": "+tiles[k].getX()+" "+tiles[k].getY());
             }
