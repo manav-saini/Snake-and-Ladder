@@ -28,8 +28,8 @@
       <TextField fx:id="player2name1" layoutX="600.0" layoutY="312.0" prefHeight="31.0" prefWidth="138.0" promptText="Player2" />
       <TextField fx:id="player2name2" layoutX="600.0" layoutY="417.0" prefHeight="31.0" prefWidth="138.0" promptText="Player2" />
       <TextField fx:id="player1name2" layoutX="600.0" layoutY="378.0" prefHeight="31.0" prefWidth="138.0" promptText="Player1" />
-      <Circle fx:id="tokenPlayer1" fill="RED" layoutX="14.0" layoutY="522.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="tokenPlayer2" fill="YELLOW" layoutX="43.0" layoutY="522.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="tokenPlayer1" fill="WHITE" layoutX="14.0" layoutY="522.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="tokenPlayer2" layoutX="43.0" layoutY="522.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
       <Button fx:id="startbutton" layoutX="550.0" layoutY="498.0" mnemonicParsing="false" onAction="#onStartClicked" text="Start" />
       <ImageView fx:id="diceGif" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -66,6 +66,6 @@
             <Image url="@6.png" />
          </image>
       </ImageView>
-      <Button fx:id="dice_button" layoutX="183.0" layoutY="543.0" mnemonicParsing="false" onAction="#onDiceclicked" prefHeight="65.0" prefWidth="65.0"  />
+      <Button fx:id="dice_button" layoutX="183.0" layoutY="543.0" mnemonicParsing="false" onAction="#onDiceclicked" prefHeight="65.0" prefWidth="65.0" />
    </children>
 </Pane>
