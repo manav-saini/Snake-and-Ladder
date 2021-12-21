@@ -79,8 +79,18 @@ public class player {
         token.setTranslateY(desTile.getY()- token.getLayoutY());
         token.setLayoutY(desTile.getLayoutY());
         token.setLayoutX(desTile.getLayoutX());
-        System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
+        System.out.println("Layout : "+token.getTranslateX()+" "+token.getTranslateY());
         t = desTile;
+        currTile = i;
+    }
+
+    void run(double x, double y,int i){
+        token.setTranslateX(x- token.getLayoutX());
+        token.setTranslateY(y- token.getLayoutY());
+        token.setLayoutY(y);
+        token.setLayoutX(x);
+        System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
+        //t = desTile;
         currTile = i;
     }
 

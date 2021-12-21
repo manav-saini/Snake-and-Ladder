@@ -16,6 +16,8 @@ public class board {
     ArrayList<Tile> t;
     private HashMap<Integer,Integer> snake_pos;
     private HashMap<Integer,Integer> ladder_pos;
+    private double colPos[];
+    private double rowPos[];
     player user1,user2;
     player curr_player;
 
@@ -107,11 +109,13 @@ public class board {
         double colArr[] = new double[number_of_columns];
         double rowArr[]=new double[number_of_rows];
         for (int i = 0; i < number_of_columns; i++) {
-            colArr[i] = orgx  + (i * wid) - wid/2;
+            colArr[i] = orgx  + (i * wid) + wid/2;
         }
         for (int i = 0; i < number_of_rows; i++) {
             rowArr[i]= (orgy - (i*hei) - hei/2);
         }
+        colPos = colArr;
+        rowPos = rowArr;
         for (int i = 0; i < number_of_rows; i++) {
             for (int j = 0; j < number_of_columns; j++) {
                 int k = i*number_of_columns + j;
@@ -130,7 +134,6 @@ public class board {
                     tiles[k].setLayoutX(colArr[9-j]);
                     tiles[k].setX(colArr[9-j]);
                 }
-                tiles[k].setFill(Color.BLACK);
                 System.out.println(k + ": "+tiles[k].getX()+" "+tiles[k].getY());
             }
         }
@@ -141,7 +144,7 @@ public class board {
     }
 
     int update_pos(int current_pos){
-        int new_pos = -2;
+        int new_pos;
         if(ladder_pos.containsKey(current_pos)){
             new_pos = ladder_pos.get(current_pos);
         }
@@ -182,5 +185,24 @@ public class board {
 
     public ArrayList<Tile> getT() {
         return t;
+    }
+
+    public double[] getRowPos() {
+        return rowPos;
+    }
+
+    public double[] getColPos() {
+        return colPos;
+    }
+
+    public double getRowPos(int i) {
+        return rowPos[i/10];
+    }
+
+    public double getColPos(int i) {
+        if((i/10)%2 ==0){
+            return(colPos[i%10]);
+        }
+        return colPos[(i+9)%10];
     }
 }
