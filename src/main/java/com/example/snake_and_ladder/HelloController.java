@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -79,6 +80,20 @@ public class HelloController {
         startTile.setY(Board.getTiles(0).getLayoutY()+startTile.getHeight());
         startTile.setLayoutY(Board.getTiles(0).getLayoutY()+startTile.getHeight());
         startTile.setLayoutX(Board.getTiles(0).getLayoutX());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("RULES");
+        alert.setHeaderText("1.Need a starting 1 to commence your path on board\n2.Ladders climb you up\n3.Snakes put you down on it's tail\n4.First player to reach 100th position wins the game\n5. You can't move ahead 100 thus any score leading to above 100 gets discarded");
+        alert.setContentText("\nPress\nStart button to continue\n Exit to exit");
+        alert.showAndWait();
+    }
+
+    public void setimg(String s,Button b){
+        Image img = new Image(getClass().getResourceAsStream(s));
+        ImageView view = new ImageView(img);
+        view.setFitHeight(b.getPrefHeight());
+        view.setFitWidth(b.getPrefWidth());
+        view.setPreserveRatio(false);
+        b.setGraphic(view);
     }
 
     public void setimg(String s,Button b){
@@ -147,10 +162,15 @@ public class HelloController {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        label_dice.setText(""+Dice.getDice_value());
+                    }
+                });//TODO : Remove this in final code
             }
         };
         t1.start();
-        label_dice.setText(""+Dice.getDice_value());//TODO : Remove this in final code
     }
 
     private void showface() {
@@ -181,6 +201,14 @@ public class HelloController {
         player2.setName(d.getPlayer2());
         tokenPlayer1.setFill(d.getC1());
         tokenPlayer2.setFill(d.getC2());
+        if(d.getCh()==1){
+            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("red.png"))));
+            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("yellow.png"))));
+        }
+        else if(d.getCh()==2){
+            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("blue.png"))));
+            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("green.png"))));
+        }
 //        Threadclass t1 = new Threadclass();
 //        t1.start();
         startbutton.setDisable(true);
@@ -279,6 +307,7 @@ public class HelloController {
             public void run() {
                 setTokensproperties();
                 rungame();
+                endgame();
             }
         };
         t2.start();
@@ -437,23 +466,28 @@ public class HelloController {
     }
 
     private void endgame() {
-        //TODO: Winner prompt
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("GAME OVER");
-                alert.setHeaderText("WINNER");
-                if(player1.getNo_of_wins()!=0){
-                    alert.setContentText(player1.getName());
+        if(gameover) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("GAME OVER");
+                    alert.setHeaderText("WINNER");
+                    if (player1.getNo_of_wins() != 0) {
+                        alert.setContentText(player1.getName());
+                    } else {
+                        alert.setContentText(player2.getName());
+                    }
+                    ImageView view = new ImageView(new Image(getClass().getResourceAsStream("winner.gif")));
+                    view.setPreserveRatio(true);
+                    view.setFitHeight(500);
+                    view.setFitWidth(200);
+                    alert.setGraphic(view);
+                    alert.showAndWait();
+                    System.exit(0);
                 }
-                else{
-                    alert.setContentText(player2.getName());
-                }
-                alert.showAndWait();
-                System.exit(0);
-            }
-        });
+            });
+        }
 //        disableTokens(false);
 //        player1name1.setVisible(true);
 //        player2name1.setVisible(true);
