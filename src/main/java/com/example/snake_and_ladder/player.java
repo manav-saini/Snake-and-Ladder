@@ -2,11 +2,14 @@ package com.example.snake_and_ladder;
 
 import javafx.scene.shape.Circle;
 
+import static java.lang.Thread.sleep;
+
 public class player {
     private Circle token;
     private String name;
-    private int no_of_wins;
+    private int no_of_wins =0 ;
     private boolean turn, start;
+    private double orgx, orgy;
     private piece P;
     private Tile t;
     private int currTile=0;
@@ -22,8 +25,17 @@ public class player {
         this.P = P;
     }
 
+    public void reset(){
+        this.token.setLayoutX(orgx);
+        this.token.setLayoutY(orgy);
+        this.token.setTranslateX(0);
+        this.token.setTranslateY(0);
+    }
+
     public void setToken(Circle token) {
         this.token = token;
+        orgx = token.getLayoutX();
+        orgy = token.getLayoutY();
     }
 
     public Circle getToken() {
@@ -63,12 +75,22 @@ public class player {
     }
 
     void run(Tile desTile, int i){
-        token.setTranslateX(desTile.getX()- t.getX());
-        token.setTranslateY(desTile.getY()-t.getY());
+        token.setTranslateX(desTile.getX()- token.getLayoutX());
+        token.setTranslateY(desTile.getY()- token.getLayoutY());
         token.setLayoutY(desTile.getLayoutY());
         token.setLayoutX(desTile.getLayoutX());
-        System.out.println("Layout : "+token.getLayoutY()+token.getLayoutX());
+        System.out.println("Layout : "+token.getTranslateX()+" "+token.getTranslateY());
         t = desTile;
+        currTile = i;
+    }
+
+    void run(double x, double y,int i){
+        token.setTranslateX(x- token.getLayoutX());
+        token.setTranslateY(y- token.getLayoutY());
+        token.setLayoutY(y);
+        token.setLayoutX(x);
+        System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
+        //t = desTile;
         currTile = i;
     }
 
