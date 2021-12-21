@@ -7,12 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -37,33 +33,11 @@ public class HelloController {
     @FXML
     public ImageView dice6;
     @FXML
-    public Button HomeStart;
-    @FXML
     public Button Exitbutton;
     boolean gameover = false;
     static dice Dice;
     @FXML
     public Label label_dice;
-    @FXML
-    public CheckBox chb1;
-    @FXML
-    public CheckBox chb2;
-    @FXML
-    public TextField player1name1;
-    @FXML
-    public TextField player2name1;
-    @FXML
-    public TextField player2name2;
-    @FXML
-    public TextField player1name2;
-    @FXML
-    public Circle tokenBlue;
-    @FXML
-    public Circle tokenGreen;
-    @FXML
-    public Circle tokenYellow;
-    @FXML
-    public Circle tokenRed;
     @FXML
     public Circle tokenPlayer2;
     @FXML
@@ -89,6 +63,9 @@ public class HelloController {
         player2 = new player();
         dice_button.setDisable(true);
         Board.createBoard(img.localToScene(img.getBoundsInLocal()));
+        Board.setD(Dice);
+        Board.setUser1(player1);
+        Board.setUser2(player2);
         setdiceVisibility(false);
         startTile = new Tile("NONE");
         startTile.setWidth(Board.getTiles(0).getWidth());
@@ -116,22 +93,21 @@ public class HelloController {
         dice4.setVisible(set);
         dice5.setVisible(set);
     }
-
-    void changecolor(player p,String choice){
-        if(choice.compareToIgnoreCase("Blue")==0){
-            p.getToken().setFill(Color.BLUE);
-        }
-        else if(choice.compareToIgnoreCase("Red")==0){
-            p.getToken().setFill(Color.RED);
-        }
-        else if(choice.compareToIgnoreCase("Green")==0){
-            p.getToken().setFill(Color.GREEN);
-        }
-        else if(choice.compareToIgnoreCase("Yellow")==0){
-            p.getToken().setFill(Color.YELLOW);
-        }
-        p.getToken().setFill(Color.BLACK);
-    }
+//    void changecolor(player p,String choice){
+//        if(choice.compareToIgnoreCase("Blue")==0){
+//            p.getToken().setFill(Color.BLUE);
+//        }
+//        else if(choice.compareToIgnoreCase("Red")==0){
+//            p.getToken().setFill(Color.RED);
+//        }
+//        else if(choice.compareToIgnoreCase("Green")==0){
+//            p.getToken().setFill(Color.GREEN);
+//        }
+//        else if(choice.compareToIgnoreCase("Yellow")==0){
+//            p.getToken().setFill(Color.YELLOW);
+//        }
+//        p.getToken().setFill(Color.BLACK);
+//    }TODO : Remove in final code
 
     @FXML
     void onDiceclicked(ActionEvent event) {
@@ -143,20 +119,20 @@ public class HelloController {
                 dice_button.setDisable(true);
                 Dice.setThrown(true);
                 try{
-                    Thread.sleep(500);
+                    sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 showface();
                 try{
-                    Thread.sleep(500);
+                    sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         };
         t1.start();
-        label_dice.setText(""+Dice.getDice_value());
+        label_dice.setText(""+Dice.getDice_value());//TODO : Remove this in final code
     }
 
     private void showface() {
@@ -171,13 +147,13 @@ public class HelloController {
         }
     }
 
-    public void onCheckBox1(ActionEvent actionEvent) {
-        chb2.setSelected(false);
-    }
-
-    public void onCheckBox2(ActionEvent actionEvent) {
-        chb1.setSelected(false);
-    }
+//    public void onCheckBox1(ActionEvent actionEvent) {
+//        chb2.setSelected(false);
+//    }
+//
+//    public void onCheckBox2(ActionEvent actionEvent) {
+//        chb1.setSelected(false);
+//    }TODO:Remove this in final code
 
     public void onStartClicked(ActionEvent actionEvent) {
         Node node = (Node) actionEvent.getSource();
@@ -187,8 +163,9 @@ public class HelloController {
         player2.setName(d.getPlayer2());
         tokenPlayer1.setFill(d.getC1());
         tokenPlayer2.setFill(d.getC2());
-        Threadclass t1 = new Threadclass();
-        t1.start();
+//        Threadclass t1 = new Threadclass();
+//        t1.start();
+        startgame();
     }
 
     private void setTokensproperties() {
@@ -223,23 +200,18 @@ public class HelloController {
 //        }
 //        System.out.println("Player 1 : "+name1+" 2: "+name2);
 //        player1.setName(name1);
-//        player2.setName(name2);
+//        player2.setName(name2);TODO : Remove this in final code
         player1.setToken(tokenPlayer1);
         player2.setToken(tokenPlayer2);
     }
 
-    public static void setPlayers(String n1, String n2, Color c1, Color c2){
-        player1.setName(n1);
-        player2.setName(n2);
-    }
-
-    public void onScene1ExitClicked(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+//    public void onScene1ExitClicked(ActionEvent event) throws IOException {
+//        root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }TODO : Remove this in final code
 
     public void onExitClicked(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Home.fxml"));
@@ -273,6 +245,7 @@ public class HelloController {
             this.y = y;
             this.currT = i;
         }
+
         @Override
         public void run() {
             //p.run(x,y,currT);
@@ -299,10 +272,9 @@ public class HelloController {
 //        player2name1.setDisable(set);
 //        player2name2.setDisable(set);
 //        startbutton.setDisable(set);
-//    }
+//    }TODO : Remove in final code
 
     private void rungame() {
-        player p ;
         if((int)(Math.random()*2) ==0){
             player1.setTurn(true);
         }
@@ -313,80 +285,155 @@ public class HelloController {
         //player2.run(startTile,-1);
         player1.run(startTile.getX() - startTile.getWidth()/4,startTile.getY(),-1);
         player2.run(startTile.getX() + startTile.getWidth()/4,startTile.getY(),-1);
-        Thread t = new Thread(){
-            @Override
-            public void run() {
-                while(!gameover) {
-                    dice_button.setDisable(false);
-                    try{
-                        Thread.sleep(1000);
+//        Thread t = new Thread(){
+//            @Override
+//            public void run() {
+//                while(!gameover) {
+//                    dice_button.setDisable(false);
+//                    try{
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    if(Dice.getThrown()){
+//                        Dice.setThrown(false);
+//                        player1.setTurn(!player1.isTurn());
+//                        player2.setTurn(!player2.isTurn());
+//                        player p = player1.isTurn()?player1:player2;
+//                        System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
+//                        if(!p.isStart()) {
+//                            if(Dice.getDice_value()!=1) {
+//                                continue;
+//                            }
+//                            p.setStart(true);
+//                        }
+//                        if((p.getCurrTile() + Dice.getDice_value() )<=99){
+//                            for (int i = 0; i < Dice.getDice_value(); i++) {
+//                                Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile()+ 1), p.getCurrTile()+ 1));
+//                                //Platform.runLater(new Runableclass(p,Board.getColPos(p.getCurrTile()+1), Board.getRowPos((p.getCurrTile()+1)), p.getCurrTile()+ 1));
+//                                try {
+//                                    sleep(1000);
+//                                } catch (InterruptedException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                        int tmp = p .getCurrTile() + 1;
+//                        if(Board.getLadder_pos().containsKey(tmp)){
+//                            tmp = Board.getLadder_pos().get(tmp) - 1;
+//                            Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
+//                            try {
+//                                Thread.sleep(500);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                        if(Board.getSnake_pos().containsKey(tmp)){
+//                            tmp = Board.getSnake_pos().get(tmp) - 1;
+//                            Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
+//                            try {
+//                                Thread.sleep(500);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                        System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
+//                        if(p.getCurrTile()>=99){
+//                            gameover=true;
+//                            p.setNo_of_wins(p.getNo_of_wins()+1);
+//                        }
+//                        System.out.println(p.getName()+" "+p.getCurrTile());
+//                        Dice.setThrown(false);
+//                    }
+//                    setdiceVisibility(false);
+//                    dice_button.setDisable(true);
+//                }
+//                endgame();
+//            }
+//        };
+//        t.start();
+        while(!gameover) {
+            dice_button.setDisable(false);
+            try{
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(Dice.getThrown()){
+                Dice.setThrown(false);
+                player1.setTurn(!player1.isTurn());
+                player2.setTurn(!player2.isTurn());
+                player p = player1.isTurn()?player1:player2;
+                System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
+                if(!p.isStart()) {
+                    if(Dice.getDice_value()!=1) {
+                        continue;
+                    }
+                    p.setStart(true);
+                }
+                if((p.getCurrTile() + Dice.getDice_value() )<=99){
+                    for (int i = 0; i < Dice.getDice_value(); i++) {
+                        Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile()+ 1), p.getCurrTile()+ 1));
+                        //Platform.runLater(new Runableclass(p,Board.getColPos(p.getCurrTile()+1), Board.getRowPos((p.getCurrTile()+1)), p.getCurrTile()+ 1));
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                int tmp = p .getCurrTile() + 1;
+                if(Board.getLadder_pos().containsKey(tmp)){
+                    tmp = Board.getLadder_pos().get(tmp) - 1;
+                    Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
+                    try {
+                        sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if(Dice.getThrown()){
-                        Dice.setThrown(false);
-                        player1.setTurn(!player1.isTurn());
-                        player2.setTurn(!player2.isTurn());
-                        player p = player1.isTurn()?player1:player2;
-                        System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
-                        if(!p.isStart()) {
-                            if(Dice.getDice_value()!=1) {
-                                continue;
-                            }
-                            p.setStart(true);
-                        }
-                        if((p.getCurrTile() + Dice.getDice_value() )<=99){
-                            for (int i = 0; i < Dice.getDice_value(); i++) {
-                                Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile()+ 1), p.getCurrTile()+ 1));
-                                //Platform.runLater(new Runableclass(p,Board.getColPos(p.getCurrTile()+1), Board.getRowPos((p.getCurrTile()+1)), p.getCurrTile()+ 1));
-                                try {
-                                    sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                        int tmp = p .getCurrTile() + 1;
-                        if(Board.getLadder_pos().containsKey(tmp)){
-                            tmp = Board.getLadder_pos().get(tmp) - 1;
-                            Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if(Board.getSnake_pos().containsKey(tmp)){
-                            tmp = Board.getSnake_pos().get(tmp) - 1;
-                            Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
-                        if(p.getCurrTile()>=99){
-                            gameover=true;
-                            p.setNo_of_wins(p.getNo_of_wins()+1);
-                        }
-                        System.out.println(p.getName()+" "+p.getCurrTile());
-                        Dice.setThrown(false);
-                    }
-                    setdiceVisibility(false);
-                    dice_button.setDisable(true);
                 }
-                endgame();
+                if(Board.getSnake_pos().containsKey(tmp)){
+                    tmp = Board.getSnake_pos().get(tmp) - 1;
+                    Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
+                if(p.getCurrTile()>=99){
+                    gameover=true;
+                    p.setNo_of_wins(p.getNo_of_wins()+1);
+                }
+                System.out.println(p.getName()+" "+p.getCurrTile());
+                Dice.setThrown(false);
             }
-        };
-        t.start();
-        //endgame();
+            setdiceVisibility(false);
+            dice_button.setDisable(true);
+        }
+        endgame();
         //resetGame();
     }
 
     private void endgame() {
-        //TODO
-        System.exit(0);
+        //TODO: Winner prompt
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("GAME OVER");
+                alert.setHeaderText("WINNER");
+                if(player1.getNo_of_wins()!=0){
+                    alert.setContentText(player1.getName());
+                }
+                else{
+                    alert.setContentText(player2.getName());
+                }
+                alert.showAndWait();
+                System.exit(0);
+            }
+        });
 //        disableTokens(false);
 //        player1name1.setVisible(true);
 //        player2name1.setVisible(true);

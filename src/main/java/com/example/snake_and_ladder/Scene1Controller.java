@@ -9,7 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.TouchEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -42,9 +43,10 @@ public class Scene1Controller {
     public Circle tokenYellow;
     @FXML
     public Circle tokenRed;
-    private player player1,player2;
 
     private final Details d = new Details();
+    @FXML
+    public Button Exitbutton;
 
     private Stage stage;
     private Scene scene;
@@ -53,6 +55,18 @@ public class Scene1Controller {
     public void initialize(){
         chb1.setSelected(false);
         chb2.setSelected(false);
+        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
+        ImageView view = new ImageView(img);
+        view.setFitHeight(Exitbutton.getPrefHeight());
+        view.setFitWidth(Exitbutton.getPrefWidth());
+        view.setPreserveRatio(false);
+        Exitbutton.setGraphic(view);
+        img = new Image(getClass().getResourceAsStream("exit.jpg"));
+        view = new ImageView(img);
+        view.setFitHeight(startbutton.getPrefHeight());
+        view.setFitWidth(startbutton.getPrefWidth());
+        view.setPreserveRatio(false);
+        startbutton.setGraphic(view);
     }
 
     public void onCheckBox1(ActionEvent actionEvent) {
@@ -62,6 +76,7 @@ public class Scene1Controller {
     public void onCheckBox2(ActionEvent actionEvent) {
         chb1.setSelected(false);
     }
+
     private void setTokensproperties() {
         String name1,name2;
         if(chb2.isSelected()){

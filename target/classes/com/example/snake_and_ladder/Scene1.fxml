@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.image.Image?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="594.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snake_and_ladder.Scene1Controller">
     <children>
@@ -23,6 +18,6 @@
         <TextField fx:id="player2name2" layoutX="194.0" layoutY="417.0" prefHeight="54.0" prefWidth="189.0" promptText="Player2" />
         <TextField fx:id="player1name2" layoutX="194.0" layoutY="350.0" prefHeight="54.0" prefWidth="189.0" promptText="Player1" />
         <Button fx:id="startbutton" layoutX="200.0" layoutY="502.0" mnemonicParsing="false" onAction="#onScene1StartClicked" prefHeight="48.0" prefWidth="189.0" text="Start" />
-      <Button layoutX="25.0" layoutY="44.0" mnemonicParsing="false" onAction="#onScene1ExitClicked" prefHeight="31.0" prefWidth="60.0" text="Exit" />
+      <Button fx:id="Exitbutton" layoutX="25.0" layoutY="44.0" mnemonicParsing="false" onAction="#onScene1ExitClicked" prefHeight="31.0" prefWidth="60.0" />
     </children>
 </Pane>
