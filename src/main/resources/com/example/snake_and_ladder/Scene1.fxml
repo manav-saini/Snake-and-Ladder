@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.Image?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.snake_and_ladder.HelloController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snake_and_ladder.HelloController">
+    <children>
+        <Circle fx:id="tokenBlue" fill="DODGERBLUE" layoutX="91.0" layoutY="393.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="tokenGreen" fill="LIME" layoutX="91.0" layoutY="432.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="tokenYellow" fill="YELLOW" layoutX="91.0" layoutY="327.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="tokenRed" fill="RED" layoutX="91.0" layoutY="287.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+        <CheckBox fx:id="chb1" layoutX="50.0" layoutY="297.0" mnemonicParsing="false" onAction="#onCheckBox1" />
+        <CheckBox fx:id="chb2" layoutX="50.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCheckBox2" />
+        <TextField fx:id="player1name1" layoutX="109.0" layoutY="272.0" prefHeight="31.0" prefWidth="138.0" promptText="Player1" />
+        <TextField fx:id="player2name1" layoutX="109.0" layoutY="312.0" prefHeight="31.0" prefWidth="138.0" promptText="Player2" />
+        <TextField fx:id="player2name2" layoutX="109.0" layoutY="417.0" prefHeight="31.0" prefWidth="138.0" promptText="Player2" />
+        <TextField fx:id="player1name2" layoutX="109.0" layoutY="378.0" prefHeight="31.0" prefWidth="138.0" promptText="Player1" />
+        <Button fx:id="startbutton" layoutX="46.0" layoutY="489.0" mnemonicParsing="false" onAction="#onStartClicked" text="Start" />
+    </children>
+</Pane>
