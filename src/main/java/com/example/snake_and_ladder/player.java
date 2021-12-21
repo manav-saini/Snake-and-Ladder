@@ -7,7 +7,7 @@ import static java.lang.Thread.sleep;
 public class player {
     private Circle token;
     private String name;
-    private int no_of_wins;
+    private int no_of_wins =0 ;
     private boolean turn, start;
     private double orgx, orgy;
     private piece P;
