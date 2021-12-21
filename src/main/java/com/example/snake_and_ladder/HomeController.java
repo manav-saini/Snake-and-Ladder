@@ -31,7 +31,7 @@ public class HomeController {
         view.setFitWidth(HomeExit.getPrefWidth());
         view.setPreserveRatio(false);
         HomeExit.setGraphic(view);
-        img = new Image(getClass().getResourceAsStream("exit.jpg"));
+        img = new Image(getClass().getResourceAsStream("Play.jpg"));
         view = new ImageView(img);
         view.setFitHeight(HomeStart.getPrefHeight());
         view.setFitWidth(HomeStart.getPrefWidth());

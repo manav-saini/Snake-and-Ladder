@@ -55,18 +55,29 @@ public class Scene1Controller {
     public void initialize(){
         chb1.setSelected(false);
         chb2.setSelected(false);
-        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
+//        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
+//        ImageView view = new ImageView(img);
+//        view.setFitHeight(Exitbutton.getPrefHeight());
+//        view.setFitWidth(Exitbutton.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        Exitbutton.setGraphic(view);
+        setimg("exit.jpg",Exitbutton);
+        setimg("Okay.png",startbutton);
+//        img = new Image(getClass().getResourceAsStream("Okay.png"));
+//        view = new ImageView(img);
+//        view.setFitHeight(startbutton.getPrefHeight());
+//        view.setFitWidth(startbutton.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        startbutton.setGraphic(view);
+    }
+
+    public void setimg(String s,Button b){
+        Image img = new Image(getClass().getResourceAsStream(s));
         ImageView view = new ImageView(img);
-        view.setFitHeight(Exitbutton.getPrefHeight());
-        view.setFitWidth(Exitbutton.getPrefWidth());
+        view.setFitHeight(b.getPrefHeight());
+        view.setFitWidth(b.getPrefWidth());
         view.setPreserveRatio(false);
-        Exitbutton.setGraphic(view);
-        img = new Image(getClass().getResourceAsStream("exit.jpg"));
-        view = new ImageView(img);
-        view.setFitHeight(startbutton.getPrefHeight());
-        view.setFitWidth(startbutton.getPrefWidth());
-        view.setPreserveRatio(false);
-        startbutton.setGraphic(view);
+        b.setGraphic(view);
     }
 
     public void onCheckBox1(ActionEvent actionEvent) {

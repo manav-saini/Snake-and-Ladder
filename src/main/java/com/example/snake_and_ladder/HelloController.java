@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -34,6 +35,8 @@ public class HelloController {
     public ImageView dice6;
     @FXML
     public Button Exitbutton;
+    @FXML
+    public ImageView arrow;
     boolean gameover = false;
     static dice Dice;
     @FXML
@@ -57,6 +60,8 @@ public class HelloController {
     private Parent root;
 
     public void initialize(){
+        setimg("exit.jpg",Exitbutton);
+        setimg("Start.jpg",startbutton);
         Board = new board();
         Dice = new dice(dice_button);
         player1 = new player();
@@ -76,6 +81,15 @@ public class HelloController {
         startTile.setLayoutX(Board.getTiles(0).getLayoutX());
     }
 
+    public void setimg(String s,Button b){
+        Image img = new Image(getClass().getResourceAsStream(s));
+        ImageView view = new ImageView(img);
+        view.setFitHeight(b.getPrefHeight());
+        view.setFitWidth(b.getPrefWidth());
+        view.setPreserveRatio(false);
+        b.setGraphic(view);
+    }
+
     public void onScene1StartClicked(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -85,6 +99,8 @@ public class HelloController {
     }
 
     private void setdiceVisibility(boolean set) {
+        arrow.setVisible(!set);
+        arrow.setDisable(set);
         diceGif.setVisible(set);
         dice1.setVisible(set);
         dice2.setVisible(set);
@@ -114,6 +130,8 @@ public class HelloController {
         Thread t1 = new Thread(){
             @Override
             public void run() {
+                arrow.setVisible(false);
+                arrow.setDisable(true);
                 diceGif.setVisible(true);
                 int val = Dice.number_generator();
                 dice_button.setDisable(true);
@@ -165,6 +183,8 @@ public class HelloController {
         tokenPlayer2.setFill(d.getC2());
 //        Threadclass t1 = new Threadclass();
 //        t1.start();
+        startbutton.setDisable(true);
+        startbutton.setVisible(false);
         startgame();
     }
 
