@@ -91,8 +91,8 @@ public class Scene1Controller {
     private void setTokensproperties() {
         String name1,name2;
         if(chb2.isSelected()){
-            name1 = player1name2.getAccessibleText();
-            name2 = player2name2.getAccessibleText();
+            name1 = player1name2.getText();
+            name2 = player2name2.getText();
             tokenRed.setVisible(false);
             tokenYellow.setVisible(false);
             d.setC1(tokenBlue.getFill());
@@ -119,13 +119,13 @@ public class Scene1Controller {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(name1==null || name1 == ""){
+        if(name1==null || name1.equals("")){
             name1 = "Player 1";
         }
-        if(name2==null || name2 == ""){
+        if(name2==null || name2.equals("")){
             name2 = "Player 2";
         }
-        System.out.println("Player 1 : "+name1+" 2: "+name2);
+//        System.out.println("Player 1 : "+name1+" 2: "+name2);
         chb1.setDisable(true);
         chb2.setDisable(true);
         player1name1.setDisable(true);
