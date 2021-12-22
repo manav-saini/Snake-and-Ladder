@@ -76,24 +76,15 @@ public class HelloController {
         startTile = new Tile("NONE");
         startTile.setWidth(Board.getTiles(0).getWidth());
         startTile.setHeight(Board.getTiles(0).getHeight());
-        startTile.setX(Board.getTiles(0).getLayoutX());
-        startTile.setY(Board.getTiles(0).getLayoutY()+startTile.getHeight());
-        startTile.setLayoutY(Board.getTiles(0).getLayoutY()+startTile.getHeight());
-        startTile.setLayoutX(Board.getTiles(0).getLayoutX());
+        startTile.setX(Board.getTiles(0).getLayoutBounds().getMinX());
+        startTile.setY(Board.getTiles(0).getLayoutBounds().getMinY()+startTile.getHeight());
+        startTile.setLayoutY(Board.getTiles(0).getLayoutBounds().getMinY()+startTile.getHeight());
+        startTile.setLayoutX(Board.getTiles(0).getLayoutBounds().getMinX());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("RULES");
         alert.setHeaderText("1.Need a starting 1 to commence your path on board\n2.Ladders climb you up\n3.Snakes put you down on it's tail\n4.First player to reach 100th position wins the game\n5. You can't move ahead 100 thus any score leading to above 100 gets discarded");
         alert.setContentText("\nPress\nStart button to continue\n Exit to exit");
         alert.showAndWait();
-    }
-
-    public void setimg(String s,Button b){
-        Image img = new Image(getClass().getResourceAsStream(s));
-        ImageView view = new ImageView(img);
-        view.setFitHeight(b.getPrefHeight());
-        view.setFitWidth(b.getPrefWidth());
-        view.setPreserveRatio(false);
-        b.setGraphic(view);
     }
 
     public void setimg(String s,Button b){
@@ -148,7 +139,7 @@ public class HelloController {
                 arrow.setVisible(false);
                 arrow.setDisable(true);
                 diceGif.setVisible(true);
-                int val = Dice.number_generator();
+                Dice.number_generator();
                 dice_button.setDisable(true);
                 Dice.setThrown(true);
                 try{
@@ -262,11 +253,23 @@ public class HelloController {
 //    }TODO : Remove this in final code
 
     public void onExitClicked(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Exit");
+        alert.setHeaderText("Are you sure you want to Exit?");
+        alert.setContentText(null);
+        alert.showAndWait().ifPresent(response->{
+            if(response== ButtonType.OK){
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+        });
     }
 
     class Threadclass extends Thread{
@@ -278,7 +281,7 @@ public class HelloController {
     }
 
     class Runableclass implements Runnable{
-        player p;
+        final player p;
         Tile t;
         double x,y;
         int currT;
@@ -296,7 +299,7 @@ public class HelloController {
 
         @Override
         public void run() {
-            //p.run(x,y,currT);
+//            p.run(x,y,currT);
             p.run(t, currT);
         }
     }
@@ -330,10 +333,10 @@ public class HelloController {
         else{
             player2.setTurn(true);
         }
-        //player1.run(startTile,-1);
-        //player2.run(startTile,-1);
-        player1.run(startTile.getX() - startTile.getWidth()/4,startTile.getY(),-1);
-        player2.run(startTile.getX() + startTile.getWidth()/4,startTile.getY(),-1);
+        player1.run(startTile,-1);
+        player2.run(startTile,-1);
+//        player1.run(startTile.getX() - startTile.getWidth()/4,startTile.getY(),-1);
+//        player2.run(startTile.getX() + startTile.getWidth()/4,startTile.getY(),-1);
 //        Thread t = new Thread(){
 //            @Override
 //            public void run() {
@@ -410,9 +413,17 @@ public class HelloController {
             }
             if(Dice.getThrown()){
                 Dice.setThrown(false);
+                dice_button.setDisable(true);
                 player1.setTurn(!player1.isTurn());
                 player2.setTurn(!player2.isTurn());
-                player p = player1.isTurn()?player1:player2;
+                player p;
+                if(player1.isTurn()){
+                    p = player1;
+                }
+                else{
+                    p=player2;
+                }
+//                p = player1.isTurn()?player1:player2;
                 System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
                 if(!p.isStart()) {
                     if(Dice.getDice_value()!=1) {
@@ -420,10 +431,11 @@ public class HelloController {
                     }
                     p.setStart(true);
                 }
+                int tmp;
                 if((p.getCurrTile() + Dice.getDice_value() )<=99){
-                    for (int i = 0; i < Dice.getDice_value(); i++) {
+                    tmp = Dice.getDice_value();
+                    for (int i = 0; i < tmp; i++) {
                         Platform.runLater(new Runableclass(p, Board.getTiles(p.getCurrTile()+ 1), p.getCurrTile()+ 1));
-                        //Platform.runLater(new Runableclass(p,Board.getColPos(p.getCurrTile()+1), Board.getRowPos((p.getCurrTile()+1)), p.getCurrTile()+ 1));
                         try {
                             sleep(1000);
                         } catch (InterruptedException e) {
@@ -431,7 +443,7 @@ public class HelloController {
                         }
                     }
                 }
-                int tmp = p .getCurrTile() + 1;
+                tmp = p .getCurrTile() + 1;
                 if(Board.getLadder_pos().containsKey(tmp)){
                     tmp = Board.getLadder_pos().get(tmp) - 1;
                     Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
@@ -456,10 +468,8 @@ public class HelloController {
                     p.setNo_of_wins(p.getNo_of_wins()+1);
                 }
                 System.out.println(p.getName()+" "+p.getCurrTile());
-                Dice.setThrown(false);
             }
             setdiceVisibility(false);
-            dice_button.setDisable(true);
         }
         endgame();
         //resetGame();
@@ -488,15 +498,6 @@ public class HelloController {
                 }
             });
         }
-//        disableTokens(false);
-//        player1name1.setVisible(true);
-//        player2name1.setVisible(true);
-//        player1name2.setVisible(true);
-//        player2name2.setVisible(true);
-//        tokenGreen.setVisible(true);
-//        tokenYellow.setVisible(true);
-//        tokenBlue.setVisible(true);
-//        tokenRed.setVisible(true);
     }
 
     private void resetGame() {

@@ -6,24 +6,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snake_and_ladder.Scene1Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snake_and_ladder.Scene1Controller">
     <children>
-      <ImageView fitHeight="566.0" fitWidth="358.0" layoutX="-15.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="566.0" fitWidth="358.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Scene1.png" />
+            <Image url="@Scene1.jpg" />
          </image>
       </ImageView>
-        <Circle fx:id="tokenBlue" fill="DODGERBLUE" layoutX="101.0" layoutY="285.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle fx:id="tokenGreen" fill="LIME" layoutX="101.0" layoutY="325.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle fx:id="tokenYellow" fill="YELLOW" layoutX="101.0" layoutY="193.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle fx:id="tokenRed" fill="RED" layoutX="101.0" layoutY="150.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-        <CheckBox fx:id="chb1" layoutX="55.0" layoutY="159.0" mnemonicParsing="false" onAction="#onCheckBox1" prefHeight="28.0" prefWidth="28.0" />
-        <CheckBox fx:id="chb2" layoutX="55.0" layoutY="295.0" mnemonicParsing="false" onAction="#onCheckBox2" prefHeight="31.0" prefWidth="28.0" />
-        <TextField fx:id="player1name1" layoutX="122.0" layoutY="133.0" prefHeight="40.0" prefWidth="175.0" promptText="Player1" />
-        <TextField fx:id="player2name1" layoutX="122.0" layoutY="178.0" prefHeight="40.0" prefWidth="175.0" promptText="Player2" />
-        <TextField fx:id="player2name2" layoutX="122.0" layoutY="310.0" prefHeight="40.0" prefWidth="175.0" promptText="Player2" />
-        <TextField fx:id="player1name2" layoutX="122.0" layoutY="265.0" prefHeight="40.0" prefWidth="175.0" promptText="Player1" />
-        <Button fx:id="startbutton" layoutX="166.0" layoutY="484.0" mnemonicParsing="false" onAction="#onScene1StartClicked" prefHeight="48.0" prefWidth="133.0" />
-      <Button fx:id="Exitbutton" layoutX="58.0" layoutY="498.0" mnemonicParsing="false" onAction="#onScene1ExitClicked" prefHeight="31.0" prefWidth="60.0" />
+        <Circle fx:id="tokenBlue" fill="DODGERBLUE" layoutX="118.0" layoutY="235.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="tokenGreen" fill="LIME" layoutX="118.0" layoutY="275.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="tokenYellow" fill="YELLOW" layoutX="118.0" layoutY="174.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="tokenRed" fill="RED" layoutX="118.0" layoutY="132.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+        <CheckBox fx:id="chb1" layoutX="65.0" layoutY="133.0" mnemonicParsing="false" onAction="#onCheckBox1" prefHeight="28.0" prefWidth="28.0" />
+        <CheckBox fx:id="chb2" layoutX="65.0" layoutY="241.0" mnemonicParsing="false" onAction="#onCheckBox2" prefHeight="31.0" prefWidth="28.0" />
+        <TextField fx:id="player1name1" layoutX="137.0" layoutY="115.0" prefHeight="35.0" prefWidth="175.0" promptText="Player1" />
+        <TextField fx:id="player2name1" layoutX="137.0" layoutY="156.0" prefHeight="35.0" prefWidth="175.0" promptText="Player2" />
+        <TextField fx:id="player2name2" layoutX="137.0" layoutY="259.0" prefHeight="35.0" prefWidth="175.0" promptText="Player2" />
+        <TextField fx:id="player1name2" layoutX="137.0" layoutY="217.0" prefHeight="35.0" prefWidth="175.0" promptText="Player1" />
+        <Button fx:id="startbutton" layoutX="206.0" layoutY="471.0" mnemonicParsing="false" onAction="#onScene1StartClicked" prefHeight="53.0" prefWidth="117.0" />
+      <Button fx:id="Exitbutton" layoutX="33.0" layoutY="473.0" mnemonicParsing="false" onAction="#onScene1ExitClicked" prefHeight="53.0" prefWidth="60.0" />
     </children>
 </Pane>
