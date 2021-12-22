@@ -5,16 +5,18 @@ import javafx.scene.shape.Rectangle;
 import java.util.Objects;
 
 public class Tile extends Rectangle {
-    String type;
-    public Tile(String type) {
-        this.type = type;
-    }
+    private Type type;
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
+}
+enum Type{
+    NONE,
+    LADDER,
+    SNAKE;
 }

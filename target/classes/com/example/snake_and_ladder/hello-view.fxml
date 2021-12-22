@@ -15,7 +15,7 @@
       </ImageView>
       <ImageView fx:id="img" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true">
          <image>
-            <Image url="@board.png" />
+            <Image url="@board.jpg" />
          </image></ImageView>
       <Label fx:id="label_dice" layoutX="337.0" layoutY="614.0" text="Label" />
       <Circle fx:id="tokenPlayer1" fill="WHITE" layoutX="14.0" layoutY="522.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />

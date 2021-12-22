@@ -73,7 +73,8 @@ public class HelloController {
         Board.setUser1(player1);
         Board.setUser2(player2);
         setdiceVisibility(false);
-        startTile = new Tile("NONE");
+        startTile = new Tile();
+        startTile.setType(Type.NONE);
         startTile.setWidth(Board.getTiles(0).getWidth());
         startTile.setHeight(Board.getTiles(0).getHeight());
         startTile.setX(Board.getTiles(0).getLayoutBounds().getMinX());
@@ -424,7 +425,7 @@ public class HelloController {
                     p=player2;
                 }
 //                p = player1.isTurn()?player1:player2;
-                System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
+//                System.out.println(p.getName()+":"+p.getToken().getLayoutX()+" "+p.getToken().getLayoutY());
                 if(!p.isStart()) {
                     if(Dice.getDice_value()!=1) {
                         continue;
@@ -444,7 +445,7 @@ public class HelloController {
                     }
                 }
                 tmp = p .getCurrTile() + 1;
-                if(Board.getLadder_pos().containsKey(tmp)){
+                if(tmp<100 && Board.getTiles(tmp).getType().equals(Type.LADDER)){
                     tmp = Board.getLadder_pos().get(tmp) - 1;
                     Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
                     try {
@@ -453,7 +454,7 @@ public class HelloController {
                         e.printStackTrace();
                     }
                 }
-                if(Board.getSnake_pos().containsKey(tmp)){
+                if(tmp<100 && Board.getTiles(tmp).getType().equals(Type.SNAKE)){
                     tmp = Board.getSnake_pos().get(tmp) - 1;
                     Platform.runLater(new Runableclass(p, Board.getTiles(tmp), tmp));
                     try {
@@ -462,12 +463,12 @@ public class HelloController {
                         e.printStackTrace();
                     }
                 }
-                System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
+//                System.out.println(p.getToken().getLayoutX() +" "+p.getToken().getLayoutY());
                 if(p.getCurrTile()>=99){
                     gameover=true;
                     p.setNo_of_wins(p.getNo_of_wins()+1);
                 }
-                System.out.println(p.getName()+" "+p.getCurrTile());
+                System.out.println(p.getName()+":"+(p.getCurrTile()+1));
             }
             setdiceVisibility(false);
         }
@@ -483,9 +484,9 @@ public class HelloController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("GAME OVER");
                     alert.setHeaderText("WINNER");
-                    if (player1.getNo_of_wins() != 0) {
+                    if (player1.getNo_of_wins() > 0) {
                         alert.setContentText(player1.getName());
-                    } else {
+                    } else if(player2.getNo_of_wins()>0){
                         alert.setContentText(player2.getName());
                     }
                     ImageView view = new ImageView(new Image(getClass().getResourceAsStream("winner.gif")));
