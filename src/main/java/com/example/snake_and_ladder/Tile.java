@@ -17,8 +17,4 @@ public class Tile extends Rectangle {
     public void setType(String type) {
         this.type = type;
     }
-
-    public boolean special(){
-        return Objects.equals(type, "NONE");
-    }
 }

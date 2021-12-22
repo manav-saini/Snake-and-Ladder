@@ -1,5 +1,6 @@
 package com.example.snake_and_ladder;
 
+import javafx.application.Platform;
 import javafx.scene.shape.Circle;
 
 import static java.lang.Thread.sleep;
@@ -36,6 +37,14 @@ public class player {
         this.token = token;
         orgx = token.getLayoutX();
         orgy = token.getLayoutY();
+    }
+
+    public void setOrgx(double orgx) {
+        this.orgx = orgx;
+    }
+
+    public void setOrgy(double orgy) {
+        this.orgy = orgy;
     }
 
     public Circle getToken() {
@@ -75,24 +84,46 @@ public class player {
     }
 
     void run(Tile desTile, int i){
-        token.setTranslateX(desTile.getX()- token.getLayoutX());
-        token.setTranslateY(desTile.getY()- token.getLayoutY());
-        token.setLayoutY(desTile.getLayoutY());
-        token.setLayoutX(desTile.getLayoutX());
-        System.out.println("Layout : "+token.getTranslateX()+" "+token.getTranslateY());
-        t = desTile;
-        currTile = i;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+//                token.setTranslateX(desTile.getLayoutX()- token.getLayoutX());
+//                token.setTranslateY(desTile.getLayoutY()- token.getLayoutY());
+                token.setLayoutY(desTile.getLayoutY());
+                token.setLayoutX(desTile.getLayoutX());
+                orgx = desTile.getLayoutX();
+                orgy = desTile.getLayoutY();
+                t = desTile;
+                currTile = i;
+            }
+        });
     }
 
-    void run(double x, double y,int i){
-        token.setTranslateX(x- token.getLayoutX());
-        token.setTranslateY(y- token.getLayoutY());
-        token.setLayoutY(y);
-        token.setLayoutX(x);
-        System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
-        //t = desTile;
-        currTile = i;
-    }
+//    void run(double x, double y,int i){
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                token.setTranslateX(x- orgx);
+//                token.setTranslateY(y- orgy);
+//                token.setLayoutY(y);
+//                token.setLayoutX(x);
+//                orgx = x;
+//                orgy = y;
+////                System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
+//                //t = desTile;
+//                currTile = i;
+//            }
+//        });
+////        token.setTranslateX(x- orgx);
+////        token.setTranslateY(y- orgy);
+////        token.setLayoutY(y);
+////        token.setLayoutX(x);
+////        orgx = x;
+////        orgy = y;
+////        System.out.println("Layout : "+token.getLayoutX()+" "+token.getLayoutY());
+////        //t = desTile;
+////        currTile = i;
+//    }TODO : Remove in final code
 
     public void setT(Tile t) {
         this.t = t;
