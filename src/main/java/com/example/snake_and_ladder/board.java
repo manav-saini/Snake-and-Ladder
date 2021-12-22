@@ -9,20 +9,18 @@ import java.util.HashMap;
 
 public class board {
     private Tile[] tiles;
-    int number_of_rows = 10;
-    int number_of_columns = 10;
-    int total_Tiles = number_of_columns * number_of_rows;
-    dice d ;
-    ArrayList<Tile> t;
+    private int number_of_rows = 10;
+    private int number_of_columns = 10;
+    private final int total_Tiles = number_of_columns * number_of_rows;
+    private dice d ;
     private HashMap<Integer,Integer> snake_pos;
     private HashMap<Integer,Integer> ladder_pos;
     private double colPos[];
     private double rowPos[];
-    player user1,user2;
-    player curr_player;
+    private  player user1,user2;
+    private player curr_player;
 
     public board(){
-        t = new ArrayList<>();
         snake_pos = new HashMap<>();
         ladder_pos = new HashMap<>();
         snake_pos_allocator();
@@ -46,10 +44,24 @@ public class board {
             tiles[i] = new Tile("NONE");
             tiles[i].setWidth(wid);
             tiles[i].setHeight(hei);
-            t.add(tiles[i]);
         }
         Tiles_allocation(b);
+    }
 
+    public void setNumber_of_columns(int number_of_columns) {
+        this.number_of_columns = number_of_columns;
+    }
+
+    public void setNumber_of_rows(int number_of_rows) {
+        this.number_of_rows = number_of_rows;
+    }
+
+    public int getNumber_of_columns() {
+        return number_of_columns;
+    }
+
+    public int getNumber_of_rows() {
+        return number_of_rows;
     }
 
     void snake_pos_allocator(){
@@ -181,10 +193,6 @@ public class board {
 
     public void setUser2(player user2) {
         this.user2 = user2;
-    }
-
-    public ArrayList<Tile> getT() {
-        return t;
     }
 
     public double[] getRowPos() {

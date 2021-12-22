@@ -9,7 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.TouchEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -42,9 +43,10 @@ public class Scene1Controller {
     public Circle tokenYellow;
     @FXML
     public Circle tokenRed;
-    private player player1,player2;
 
     private final Details d = new Details();
+    @FXML
+    public Button Exitbutton;
 
     private Stage stage;
     private Scene scene;
@@ -53,6 +55,29 @@ public class Scene1Controller {
     public void initialize(){
         chb1.setSelected(false);
         chb2.setSelected(false);
+//        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
+//        ImageView view = new ImageView(img);
+//        view.setFitHeight(Exitbutton.getPrefHeight());
+//        view.setFitWidth(Exitbutton.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        Exitbutton.setGraphic(view);
+        setimg("exit.jpg",Exitbutton);
+        setimg("Okay.png",startbutton);
+//        img = new Image(getClass().getResourceAsStream("Okay.png"));
+//        view = new ImageView(img);
+//        view.setFitHeight(startbutton.getPrefHeight());
+//        view.setFitWidth(startbutton.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        startbutton.setGraphic(view);
+    }
+
+    public void setimg(String s,Button b){
+        Image img = new Image(getClass().getResourceAsStream(s));
+        ImageView view = new ImageView(img);
+        view.setFitHeight(b.getPrefHeight());
+        view.setFitWidth(b.getPrefWidth());
+        view.setPreserveRatio(false);
+        b.setGraphic(view);
     }
 
     public void onCheckBox1(ActionEvent actionEvent) {
@@ -62,6 +87,7 @@ public class Scene1Controller {
     public void onCheckBox2(ActionEvent actionEvent) {
         chb1.setSelected(false);
     }
+
     private void setTokensproperties() {
         String name1,name2;
         if(chb2.isSelected()){
@@ -71,6 +97,7 @@ public class Scene1Controller {
             tokenYellow.setVisible(false);
             d.setC1(tokenBlue.getFill());
             d.setC2(tokenGreen.getFill());
+            d.setCh(2);
             chb1.setVisible(false);
             player1name1.setVisible(false);
             player2name1.setVisible(false);
@@ -82,6 +109,7 @@ public class Scene1Controller {
             tokenGreen.setVisible(false);
             d.setC1(tokenRed.getFill());
             d.setC2(tokenYellow.getFill());
+            d.setCh(1);
             chb2.setVisible(false);
             player1name2.setVisible(false);
             player2name2.setVisible(false);
@@ -133,9 +161,18 @@ public class Scene1Controller {
 class Details{
     private String player1,player2;
     private Paint c1,c2;
+    private int ch=0;
     Details(){
         player1 = "";
         player2 = "";
+    }
+
+    public void setCh(int ch) {
+        this.ch = ch;
+    }
+
+    public int getCh() {
+        return ch;
     }
 
     public void setC1(Paint c1) {

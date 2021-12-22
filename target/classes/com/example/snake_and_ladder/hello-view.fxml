@@ -1,71 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snake_and_ladder.HelloController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snake_and_ladder.HelloController">
    <children>
+      <ImageView fitHeight="648.0" fitWidth="518.0" layoutX="-4.0" layoutY="-4.0" pickOnBounds="true">
+         <image>
+            <Image url="@bg.jpeg" />
+         </image>
+      </ImageView>
       <ImageView fx:id="img" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true">
          <image>
             <Image url="@board.png" />
          </image></ImageView>
-      <Circle fx:id="tokenBlue" fill="DODGERBLUE" layoutX="575.0" layoutY="393.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="tokenGreen" fill="LIME" layoutX="575.0" layoutY="432.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="label_dice" layoutX="337.0" layoutY="614.0" text="Label" />
-      <Circle fx:id="tokenYellow" fill="YELLOW" layoutX="575.0" layoutY="327.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="tokenRed" fill="RED" layoutX="575.0" layoutY="287.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <CheckBox fx:id="chb1" layoutX="525.0" layoutY="297.0" mnemonicParsing="false" onAction="#onCheckBox1" />
-      <CheckBox fx:id="chb2" layoutX="525.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCheckBox2" />
-      <TextField fx:id="player1name1" layoutX="600.0" layoutY="272.0" prefHeight="31.0" prefWidth="138.0" promptText="Player1" />
-      <TextField fx:id="player2name1" layoutX="600.0" layoutY="312.0" prefHeight="31.0" prefWidth="138.0" promptText="Player2" />
-      <TextField fx:id="player2name2" layoutX="600.0" layoutY="417.0" prefHeight="31.0" prefWidth="138.0" promptText="Player2" />
-      <TextField fx:id="player1name2" layoutX="600.0" layoutY="378.0" prefHeight="31.0" prefWidth="138.0" promptText="Player1" />
-      <Circle fx:id="tokenPlayer1" fill="WHITE" layoutX="14.0" layoutY="522.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="tokenPlayer2" layoutX="43.0" layoutY="522.0" onTouchPressed="#player" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="startbutton" layoutX="550.0" layoutY="498.0" mnemonicParsing="false" onAction="#onStartClicked" text="Start" />
-      <ImageView fx:id="diceGif" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <Circle fx:id="tokenPlayer1" fill="WHITE" layoutX="14.0" layoutY="522.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="tokenPlayer2" fill="WHITE" layoutX="43.0" layoutY="522.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="startbutton" layoutX="9.0" layoutY="561.0" mnemonicParsing="false" onAction="#onStartClicked" />
+      <ImageView fx:id="diceGif" fitHeight="65.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@roll-the-dice.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="dice1" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice1" fitHeight="70.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="dice2" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice2" fitHeight="70.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="dice3" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice3" fitHeight="70.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@3.png" />
       </image>
    </ImageView>
-      <ImageView fx:id="dice4" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice4" fitHeight="70.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@4.png" />
       </image>
    </ImageView>
-      <ImageView fx:id="dice5" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice5" fitHeight="70.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@5.png" />
       </image>
    </ImageView>
-      <ImageView fx:id="dice6" fitHeight="70.0" fitWidth="70.0" layoutX="180.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice6" fitHeight="70.0" fitWidth="70.0" layoutX="220.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@6.png" />
          </image>
       </ImageView>
-      <Button fx:id="dice_button" layoutX="183.0" layoutY="543.0" mnemonicParsing="false" onAction="#onDiceclicked" prefHeight="65.0" prefWidth="65.0" />
+      <Button fx:id="dice_button" layoutX="220.0" layoutY="541.0" mnemonicParsing="false" onAction="#onDiceclicked" prefHeight="70.0" prefWidth="70.0" />
+      <Button fx:id="Exitbutton" layoutX="428.0" layoutY="599.0" mnemonicParsing="false" onAction="#onExitClicked" prefHeight="31.0" prefWidth="41.0" />
+      <ImageView fx:id="arrow" fitHeight="21.0" fitWidth="50.0" layoutX="225.0" layoutY="500.0" pickOnBounds="true" rotate="90.0">
+         <image>
+            <Image url="@arrow.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
