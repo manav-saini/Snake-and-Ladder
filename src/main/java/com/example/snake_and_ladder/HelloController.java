@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
-public class HelloController {
+public class HelloController extends Predefined{
     @FXML
     public ImageView diceGif;
     @FXML
@@ -88,14 +88,14 @@ public class HelloController {
         alert.showAndWait();
     }
 
-    public void setimg(String s,Button b){
-        Image img = new Image(getClass().getResourceAsStream(s));
-        ImageView view = new ImageView(img);
-        view.setFitHeight(b.getPrefHeight());
-        view.setFitWidth(b.getPrefWidth());
-        view.setPreserveRatio(false);
-        b.setGraphic(view);
-    }
+//    public void setimg(String s,Button b){
+//        Image img = new Image(getClass().getResourceAsStream(s));
+//        ImageView view = new ImageView(img);
+//        view.setFitHeight(b.getPrefHeight());
+//        view.setFitWidth(b.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        b.setGraphic(view);
+//    }
 
     public void onScene1StartClicked(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -186,26 +186,26 @@ public class HelloController {
 //    }TODO:Remove this in final code
 
     public void onStartClicked(ActionEvent actionEvent) {
-        Node node = (Node) actionEvent.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        Details d = (Details) stage.getUserData();
-        player1.setName(d.getPlayer1());
-        player2.setName(d.getPlayer2());
-        tokenPlayer1.setFill(d.getC1());
-        tokenPlayer2.setFill(d.getC2());
-        if(d.getCh()==1){
-            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("red.png"))));
-            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("yellow.png"))));
-        }
-        else if(d.getCh()==2){
-            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("blue.png"))));
-            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("green.png"))));
-        }
-//        Threadclass t1 = new Threadclass();
-//        t1.start();
-        startbutton.setDisable(true);
-        startbutton.setVisible(false);
-        startgame();
+//        Node node = (Node) actionEvent.getSource();
+//        Stage stage = (Stage) node.getScene().getWindow();
+//        Details d = (Details) stage.getUserData();
+//        player1.setName(d.getPlayer1());
+//        player2.setName(d.getPlayer2());
+//        tokenPlayer1.setFill(d.getC1());
+//        tokenPlayer2.setFill(d.getC2());
+//        if(d.getCh()==1){
+//            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("red.png"))));
+//            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("yellow.png"))));
+//        }
+//        else if(d.getCh()==2){
+//            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("blue.png"))));
+//            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("green.png"))));
+//        }
+////        Threadclass t1 = new Threadclass();
+////        t1.start();
+//        startbutton.setDisable(true);
+//        startbutton.setVisible(false);
+//        startgame();
     }
 
     private void setTokensproperties() {
@@ -271,6 +271,51 @@ public class HelloController {
                 stage.show();
             }
         });
+    }
+
+    @FXML
+    @Override
+    public void exit(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Exit");
+        alert.setHeaderText("Are you sure you want to Exit?");
+        alert.setContentText(null);
+        alert.showAndWait().ifPresent(response->{
+            if(response== ButtonType.OK){
+//                try {
+//                    root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//                scene = new Scene(root);
+//                stage.setScene(scene);
+//                stage.show();
+                changescene(event,"Home.fxml");
+            }
+        });
+    }
+
+    @Override
+    public void start(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Details d = (Details) stage.getUserData();
+        player1.setName(d.getPlayer1());
+        player2.setName(d.getPlayer2());
+        tokenPlayer1.setFill(d.getC1());
+        tokenPlayer2.setFill(d.getC2());
+        if(d.getCh()==1){
+            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("red.png"))));
+            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("yellow.png"))));
+        }
+        else if(d.getCh()==2){
+            tokenPlayer1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("blue.png"))));
+            tokenPlayer2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("green.png"))));
+        }
+        startbutton.setDisable(true);
+        startbutton.setVisible(false);
+        startgame();
     }
 
     class Threadclass extends Thread{

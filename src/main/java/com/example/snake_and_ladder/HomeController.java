@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HomeController {
+public class HomeController extends Predefined{
     @FXML
     public Button HomeExit;
     @FXML
@@ -25,31 +25,47 @@ public class HomeController {
     private Parent root;
 
     public void initialize(){
-        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
-        ImageView view = new ImageView(img);
-        view.setFitHeight(HomeExit.getPrefHeight());
-        view.setFitWidth(HomeExit.getPrefWidth());
-        view.setPreserveRatio(false);
-        HomeExit.setGraphic(view);
-        img = new Image(getClass().getResourceAsStream("Play.jpg"));
-        view = new ImageView(img);
-        view.setFitHeight(HomeStart.getPrefHeight());
-        view.setFitWidth(HomeStart.getPrefWidth());
-        view.setPreserveRatio(false);
-        HomeStart.setGraphic(view);
+//        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
+//        ImageView view = new ImageView(img);
+//        view.setFitHeight(HomeExit.getPrefHeight());
+//        view.setFitWidth(HomeExit.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        HomeExit.setGraphic(view);
+        setimg("exit.jpg",HomeExit);
+//        img = new Image(getClass().getResourceAsStream("Play.jpg"));
+//        view = new ImageView(img);
+//        view.setFitHeight(HomeStart.getPrefHeight());
+//        view.setFitWidth(HomeStart.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        HomeStart.setGraphic(view);
+        setimg("Play.jpg",HomeStart);
     }
 
-    @FXML
-    void onhomeStartClicked(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+//    @FXML
+//    void onhomeStartClicked(ActionEvent event) throws IOException {
+//        root = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+
+//    @FXML
+//    void onHomeExitClicked(ActionEvent event) {
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle("Game Exit");
+//        alert.setHeaderText("Are you sure you want to Exit?");
+//        alert.setContentText(null);
+//        alert.showAndWait().ifPresent(response->{
+//            if(response== ButtonType.OK){
+//                System.exit(0);
+//            }
+//        });
+//    }
 
     @FXML
-    void onHomeExitClicked(ActionEvent event) {
+    @Override
+    public void exit(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Exit");
         alert.setHeaderText("Are you sure you want to Exit?");
@@ -61,6 +77,9 @@ public class HomeController {
         });
     }
 
-
-
+    @FXML
+    @Override
+    public void start(ActionEvent event) {
+        changescene(event,"Scene1.fxml");
+    }
 }

@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
-public class Scene1Controller {
+public class Scene1Controller extends Predefined{
     @FXML
     public Button startbutton;
     @FXML
@@ -55,30 +55,18 @@ public class Scene1Controller {
     public void initialize(){
         chb1.setSelected(false);
         chb2.setSelected(false);
-//        Image img = new Image(getClass().getResourceAsStream("exit.jpg"));
-//        ImageView view = new ImageView(img);
-//        view.setFitHeight(Exitbutton.getPrefHeight());
-//        view.setFitWidth(Exitbutton.getPrefWidth());
-//        view.setPreserveRatio(false);
-//        Exitbutton.setGraphic(view);
         setimg("exit.jpg",Exitbutton);
         setimg("Okay.png",startbutton);
-//        img = new Image(getClass().getResourceAsStream("Okay.png"));
-//        view = new ImageView(img);
-//        view.setFitHeight(startbutton.getPrefHeight());
-//        view.setFitWidth(startbutton.getPrefWidth());
-//        view.setPreserveRatio(false);
-//        startbutton.setGraphic(view);
     }
 
-    public void setimg(String s,Button b){
-        Image img = new Image(getClass().getResourceAsStream(s));
-        ImageView view = new ImageView(img);
-        view.setFitHeight(b.getPrefHeight());
-        view.setFitWidth(b.getPrefWidth());
-        view.setPreserveRatio(false);
-        b.setGraphic(view);
-    }
+//    public void setimg(String s,Button b){
+//        Image img = new Image(getClass().getResourceAsStream(s));
+//        ImageView view = new ImageView(img);
+//        view.setFitHeight(b.getPrefHeight());
+//        view.setFitWidth(b.getPrefWidth());
+//        view.setPreserveRatio(false);
+//        b.setGraphic(view);
+//    }
 
     public void onCheckBox1(ActionEvent actionEvent) {
         chb2.setSelected(false);
@@ -137,24 +125,46 @@ public class Scene1Controller {
         d.setPlayer2(name2);
     }
 
-    public void onScene1StartClicked(ActionEvent event) throws IOException {
-        if(chb1.isSelected() || chb2.isSelected()){
-            setTokensproperties();
-            root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setUserData(d);
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
+//    public void onScene1StartClicked(ActionEvent event) throws IOException {
+//        if(chb1.isSelected() || chb2.isSelected()){
+//            setTokensproperties();
+//            root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+//            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//            stage.setUserData(d);
+//            scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.show();
+//        }
+//    }
+
+//    public void onScene1ExitClicked(ActionEvent event) throws IOException {
+//        root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+
+    @Override
+    public void exit(ActionEvent event) {
+        changescene(event,"Home.fxml");
     }
 
-    public void onScene1ExitClicked(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    @Override
+    public void start(ActionEvent event) {
+        if(chb1.isSelected() || chb2.isSelected()){
+            setTokensproperties();
+            try {
+                root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setUserData(d);
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
