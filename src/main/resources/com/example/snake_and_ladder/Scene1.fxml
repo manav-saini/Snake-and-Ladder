@@ -23,7 +23,7 @@
         <TextField fx:id="player2name1" layoutX="137.0" layoutY="156.0" prefHeight="35.0" prefWidth="175.0" promptText="Player2" />
         <TextField fx:id="player2name2" layoutX="137.0" layoutY="259.0" prefHeight="35.0" prefWidth="175.0" promptText="Player2" />
         <TextField fx:id="player1name2" layoutX="137.0" layoutY="217.0" prefHeight="35.0" prefWidth="175.0" promptText="Player1" />
-        <Button fx:id="startbutton" layoutX="206.0" layoutY="471.0" mnemonicParsing="false" onAction="#onScene1StartClicked" prefHeight="53.0" prefWidth="117.0" />
-      <Button fx:id="Exitbutton" layoutX="33.0" layoutY="473.0" mnemonicParsing="false" onAction="#onScene1ExitClicked" prefHeight="53.0" prefWidth="60.0" />
+        <Button fx:id="startbutton" layoutX="206.0" layoutY="471.0" mnemonicParsing="false" onAction="#start" prefHeight="53.0" prefWidth="117.0" />
+      <Button fx:id="Exitbutton" layoutX="33.0" layoutY="473.0" mnemonicParsing="false" onAction="#exit" prefHeight="53.0" prefWidth="60.0" />
     </children>
 </Pane>

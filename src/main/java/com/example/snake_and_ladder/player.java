@@ -1,7 +1,10 @@
 package com.example.snake_and_ladder;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import static java.lang.Thread.sleep;
 
@@ -139,5 +142,32 @@ public class player {
 
     public void setCurrTile(int currTile) {
         this.currTile = currTile;
+    }
+}
+
+class RunnableTransition implements Runnable{
+    Tile des;
+    Node n;
+    double x,y;
+    RunnableTransition(Tile t, Node n){
+        this.des=t;
+        this.n =n;
+        this.x = n.getLayoutX();
+        this.y = n.getLayoutY();
+    }
+    @Override
+    public void run() {
+        if(des.getType().equals(Type.SNAKE)){
+            ;//TODO  :SNAKE BODY MOVEMENT
+        }
+        else{
+            TranslateTransition translate = new TranslateTransition();
+            translate.setNode(n);
+            translate.setDuration(Duration.millis(100));
+            translate.setByX((des.getLayoutX()-x));
+            translate.setByY((des.getLayoutY()-y));
+            System.out.println(translate.getByX()+":"+translate.getByY());
+            translate.play();
+        }
     }
 }
